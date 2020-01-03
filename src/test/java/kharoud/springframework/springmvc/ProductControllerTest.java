@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -64,6 +65,19 @@ public class ProductControllerTest {
         mockMvc.perform(get("/product/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("product"))
+                .andExpect(model().attribute("product", instanceOf(Product.class)));
+    }
+
+    @Test
+    public void testNewProduct() throws Exception{
+        Integer id = 1;
+
+        //should not call service
+        verifyZeroInteractions(productService);
+
+        mockMvc.perform(get("/product/new"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("productform"))
                 .andExpect(model().attribute("product", instanceOf(Product.class)));
     }
 }
