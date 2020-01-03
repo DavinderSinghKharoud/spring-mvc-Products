@@ -21,10 +21,11 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @RequestMapping("/products")
-    public String listProducts(Model model){
 
-        model.addAttribute("products",productService.listAllProducts());
+
+    @RequestMapping("/product/list")
+    public String listProducts(Model model){
+        model.addAttribute("products", productService.listAllProducts());
         return "products";
     }
 
@@ -56,6 +57,6 @@ public class ProductController {
     @RequestMapping("/product/delete/{id}")
     public String delete(@PathVariable Integer id){
         productService.deleteProduct(id);
-        return "redirect:/products";
+        return "redirect:/product/list";
     }
 }
