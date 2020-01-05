@@ -72,7 +72,6 @@ public class ProductControllerTest {
 
     @Test
     public void testNewProduct() throws Exception{
-        Integer id = 1;
 
         //should not call service before
         verifyZeroInteractions(productService);
